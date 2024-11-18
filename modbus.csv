@@ -1,0 +1,116 @@
+register,address,description,range,type
+1001,1000,Control Unit Run/Stop,0: Stop 1: Run,R/W
+1002,1001,Control Unit Mode,0: Cool 1: Heat 2: Auto,R/W
+1003,1002,Control Circuit 1 Run/Stop,0: Stop 1: Run,R/W
+1004,1003,Control Heat. OTC Circuit 1,0: No 1: Points 2: Gradient 3: Fix,R/W
+1005,1004,Control Cool. OTC Circuit 1,0: No 1: Points 2: Fix,R/W
+1006,1005,Control Circuit 1: Water heating Fix Setting Temp,0~80 °C,R/W
+1007,1006,Control Circuit 1: Water cooling Fix Setting Temp,0~80 °C,R/W
+1008,1007,Control Circuit 1: Eco mode,0: ECO 1: Comfort,R/W
+1009,1008,Control Circuit 1: Heat ECO Offset Temperature,1~10 °C,R/W
+1010,1009,Control Circuit 1: Cool ECO Offset Temperature,1~10 °C,R/W
+1011,1010,Control Circuit 1: Thermostat Available,0: Not Available 1: Available,R/W
+1012,1011,Control Circuit 1: Thermostat Setting Temperature,"50~350 (5,0~35,0 °C)",R/W
+1013,1012,Control Circuit 1: Thermostat Room Temperature,"0~1000 (0,0~100,0 °C)",R/W
+1014,1013,Control Circuit 2 Run/Stop,0: Stop 1: Run,R/W
+1015,1014,Control Heat. OTC Circuit 2,0: No 1: Points 2: Gradient 3: Fix,R/W
+1016,1015,Control Cool. OTC Circuit 2,0: No 1: Points 2: Fix,R/W
+1017,1016,Control Circuit 2: Water heating Fix Setting Temp,0~80 °C,R/W
+1018,1017,Control Circuit 2: Water cooling Fix Setting Temp,0~80 °C,R/W
+1019,1018,Control Circuit 2: Eco mode,0: ECO 1: Comfort,R/W
+1020,1019,Control Circuit 2: Heat ECO Offset Temperature,1~10 °C,R/W
+1021,1020,Control Circuit 2: Cool ECO Offset Temperature,1~10 °C,R/W
+1022,1021,Control Circuit 2: Thermostat Available,0: Not Available 1: Available,R/W
+1023,1022,Control Circuit 2: Thermostat Setting Temperature,"50~350 (5,0~35,0 °C)",R/W
+1024,1023,Control Circuit 2: Thermostat Room Temperature,"0~1000 (0,0~100,0 °C)",R/W
+1025,1024,Control DHWT Run/Stop,0: Stop 1: Run,R/W
+1026,1025,Control DHWT Setting Temperature,0~80 °C,R/W
+1027,1026,Control DHW Boost,0: No request 1: Request,R/W
+1028,1027,Control DHW Demand Mode,0: Standard 1: High demand,R/W
+1029,1028,Control Swimming Pool Run/Stop,0: Stop 1: Run,R/W
+1030,1029,Control Swimming Pool Setting Temperature,0~80 °C,R/W
+1031,1030,Control Anti Legionella Run,0: Stop 1: Run,R/W
+1032,1031,Control Anti Legionella Setting Temperature,0~80 °C,R/W
+1033,1032,Control Block menu 6,0: No 1: Block,R/W
+1034,1033,Control BMS Alarm,0: No Alarm 1: Alarm,R/W
+1051,1050,Status Unit Run/Stop,0: Stop 1: Run,R
+1052,1051,Status Unit Mode,0: Cool 1: Heat,R
+1053,1052,Status Circuit 1 Run/Stop,0: Stop 1: Run,R
+1054,1053,Status Heat. OTC Circuit 1,0: No 1: Points 2: Gradient 3: Fix,R
+1055,1054,Status Cool. OTC Circuit 1,0: No 1: Points 2: Fix,R
+1056,1055,Status Circuit 1: Water heating Fix Setting Temp,0~80 °C,R
+1057,1056,Status Circuit 1: Water cooling Fix Setting Temp,0~80 °C,R
+1058,1057,Status Circuit 1: Eco mode,0: ECO 1: Comfort,R
+1059,1058,Status Circuit 1: Heat ECO Offset Temperature,1~10 °C,R
+1060,1059,Status Circuit 1: Cool ECO Offset Temperature,1~10 °C,R
+1061,1060,Status Circuit 1: Thermostat Setting Temperature,"50~350 (5,0~35,0 °C)",R
+1062,1061,Status Circuit 1: Thermostat Room Temperature,"0~1000 (0,0~100,0 °C)",R
+1063,1062,Status Circuit 1: Wireless Setting Temperature,"50~350 (5,0~35,0 °C)",R
+1064,1063,Status Circuit 1: Wireless Room Temperature,"0~1000 (0,0~100,0 °C)",R
+1065,1064,Status Circuit 2 Run/Stop,0: Stop 1: Run,R
+1066,1065,Status Heat. OTC Circuit 2,0: No 1: Points 2: Gradient 3: Fix,R
+1067,1066,Status Cool. OTC Circuit 2,0: No 1: Points 2: Fix,R
+1068,1067,Status Circuit 2: Water heating Fix Setting Temp,0~80 °C,R
+1069,1068,Status Circuit 2: Water cooling Fix Setting Temp,0~80 °C,R
+1070,1069,Status Circuit 2: Eco mode,0: ECO 1: Comfort,R
+1071,1070,Status Circuit 2: Heat ECO Offset Temperature,1~10 °C,R
+1072,1071,Status Circuit 2: Cool ECO Offset Temperature,1~10 °C,R
+1073,1072,Status Circuit 2: Thermostat Setting Temperature,"50~350 (5,0~35,0 °C)",R
+1074,1073,Status Circuit 2: Thermostat Room Temperature,"0~1000 (0,0~100,0 °C)",R
+1075,1074,Status Circuit 2: Wireless Setting Temperature,"50~350 (5,0~35,0 °C)",R
+1076,1075,Status Circuit 2: Wireless Room Temperature,"0~1000 (0,0~100,0 °C)",R
+1077,1076,Status DHWT Run/Stop,0: Stop 1: Run,R
+1078,1077,Status DHWT Setting Temperature,0~80 °C,R
+1079,1078,Control DHW Boost,0: Disable 1: Enable,R
+1080,1079,Status DHW Demand Mode,0: Standard 1: High demand,R
+1081,1080,Status DHW Temperature,-80~100 °C,R
+1082,1081,Status Swimming Pool Run/Stop,0: Stop 1: Run,R
+1083,1082,Status Swimming Pool Setting Temperature,0~80 °C,R
+1084,1083,Status Swimming Pool Temperature,-80~100 °C,R
+1085,1084,Status Anti Legionella Run,0: Stop 1: Run,R
+1086,1085,Status Anti Legionella Setting Temperature,0~80 °C,R
+1087,1086,Status Block menu 6,0: No 1: Block,R
+1088,1087,Status BMS Alarm,0: No 1: Alarm,R
+1089,1088,Central Mode,"0: Local 1: Air 2: Water 3: Full",R
+1090,1089,System Configuration,"Bit 0: Circuit 1 Heating ;Bit 1: Circuit 2 Heating ;Bit 2: Circuit 1 Cooling ;Bit 3: Circuit 2 Cooling ;Bit 4: DHWT ;Bit 5: SWP ;Bit 6: Room thermostat Circuit 1 ;Bit 7: Room thermostat Circuit 2 ;Bit 8: Wireless setting Circuit 1 ;Bit 9: Wireless setting Circuit 2 ;Bit 10: Wireless room temperature Circuit 1 ;Bit 11: Wireless room temperature Circuit 2",R
+1091,1090,Operation State,"0: OFF ;1: Cool Demand-OFF ;2: Cool Thermo-OFF ;3: Cool Thermo-ON ;4: Heat Demand-OFF ;5: Heat Thermo-OFF ;6: Heat Thermo-ON ;7: DHW-OFF ;8: DHW-ON ;9: SWP-OFF ;10: SWP-ON ;11: Alarm",R
+1092,1091,Outdoor ambient temperature,-80~100 °C,R
+1093,1092,Water Inlet unit temperature,-80~100 °C,R
+1094,1093,Water outlet unit temperature,-80~100 °C,R
+1095,1094,H-LINK communication state,0: No alarm ;1: There is no communication with RCS or YUTAKI unit during more than 180 seconds ;2: Data initialization,R
+1096,1095,Software PCB,,R
+1097,1096,Software LCD,,R
+1098,1097,Unit Capacity,0~255 kWh,R
+1099,1098,Unit Power consumption,0~255 kWh,R
+1201,1200,Water outlet hp T° (Water outlet hp outlet unit temperature),0~100 °C,R
+1202,1201,Ta2: Outdoor Unit Ambient Average Temp.,-80~100 °C,R
+1203,1202,Ta. Second Ambient Temperature,-80~100 °C,R
+1204,1203,Ta3: Second ambient average temp.,-80~100 °C,R
+1205,1204,O2: Water outlet Temp. 2 (Two2),-80~100 °C,R
+1206,1205,O3: Water outlet Temp. 3 (Two3),-80~100 °C,R
+1207,1206,Tg: Gas Temperature (THMg),-80~100 °C,R
+1208,1207,TI: Liquid Temperature (THMl),-80~100 °C,R
+1209,1208,Td: Discharge Gas temp,-80~100 °C,R
+1210,1209,Te: Evaporation temp,-80~100 °C,R
+1211,1210,EVI: Indoor Expansion valve opening,0~100 %,R
+1212,1211,EVO: Outdoor Expansion valve,0~100 %,R
+1213,1212,H4: Inverter Operation frequency,0~115 Hz,R
+1214,1213,DI: Cause of stoppage,,R
+1215,1214,P1: Compressor running current,0~30 A,R
+1216,1215,CD: Capacity data,,R
+1217,1216,MVP: Mixing valve position,Only Circuit 2,R
+1218,1217,Defrosting,,R
+1219,1218,Unit model,0: YUTAKI S ;1: YUTAKI S COMBI ;2: S80 ;3: M,R
+1220,1219,Th: Water Temp. Setting (Ttwo),-80~100 °C,R
+1221,1220,Water flow level,"0~30 (0,0~3,0 m3/h)",R
+1222,1221,Water pump speed,0~100 %,R
+1223,1222,System status,Bit 0: Defrost ;Bit 1: Solar ;Bit 2: Water Pump 1 ;Bit 3: Water Pump 2 ;Bit 4: Water Pump 3 ;Bit 5: Compressor ON ;Bit 6: Boiler ON ;Bit 7: DHW Heater ;Bit 8: Space Heater ;Bit 9: Smart function input enable,R
+1224,1223,Alarm number,0: No Alarm XXX: Alarm number,R
+1225,1224,R134a Discharge Temperature,-80~100 °C,R
+1226,1225,R134a Suction temperature,-80~100 °C,R
+1227,1226,R134a Discharge Pressure,-0~510 (0’00~5’10 MPa),R
+1228,1227,R134a Suction pressure,-0~255 (0’00~2’55 MPa),R
+1229,1228,R134a Compressor frequency,-0~115 Hz,R
+1230,1229,R134a Indoor Expansion valve 2 opening,-0~100 %,R
+1231,1230,R134a Compressor current value,-0~300 (0’00~30’0 A),R
+1232,1231,R134a Retry Code,,R

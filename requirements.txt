@@ -1,0 +1,6 @@
+matplotlib
+reportlab
+pymodbus
+python-dotenv
+flask
+flask-socketio
