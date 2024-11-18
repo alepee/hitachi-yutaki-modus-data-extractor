@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "$(dirname "$0")/.."  # Move to root directory
 echo "Installation des dependances..."
 python3 -m pip install -r requirements.txt
 

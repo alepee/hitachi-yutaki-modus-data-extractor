@@ -26,7 +26,7 @@ Compatible with the following Hitachi Yutaki models:
 
 1. Download and install Python from [python.org](https://www.python.org/downloads/)
    - During installation, **check the "Add Python to PATH" box**
-2. Double-click on `install_and_run.bat`
+2. Double-click on `scripts/install_and_run.bat`
 
 ### For Linux/Mac
 
@@ -34,13 +34,13 @@ Compatible with the following Hitachi Yutaki models:
 2. Make the script executable with the command:
 
     ```sh
-    chmod +x install_and_run.sh
+    chmod +x scripts/install_and_run.sh
     ```
 
 3. Run the script:
 
     ```sh
-    ./install_and_run.sh
+    ./scripts/install_and_run.sh
     ```
 
 ## Gateway Configuration

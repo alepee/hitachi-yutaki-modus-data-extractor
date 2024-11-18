@@ -24,7 +24,7 @@ Compatible avec les modèles Hitachi Yutaki suivants :
 
 1. Téléchargez et installez Python depuis [python.org](https://www.python.org/downloads/)
    - Lors de l'installation, **cochez la case "Add Python to PATH"**
-2. Double-cliquez sur `install_and_run.bat`
+2. Double-cliquez sur `scripts/install_and_run.bat`
 
 ### Pour Linux/Mac
 
@@ -32,13 +32,13 @@ Compatible avec les modèles Hitachi Yutaki suivants :
 2. Rendez le script exécutable avec la commande :
 
     ```sh
-    chmod +x install_and_run.sh
+    chmod +x scripts/install_and_run.sh
     ```
 
 3. Exécutez le script :
 
     ```sh
-    ./install_and_run.sh
+    ./scripts/install_and_run.sh
     ```
 
 ## Configuration de la passerelle

@@ -1,4 +1,5 @@
 @echo off
+cd /d "%~dp0\.."  REM Move to root directory
 echo Installation des dependances...
 python -m pip install -r requirements.txt
 
