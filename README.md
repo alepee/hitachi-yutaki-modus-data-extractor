@@ -1,104 +1,106 @@
-# Lecteur de données Hitachi Yutaki via Modbus
+# Hitachi Yutaki Modbus Data Reader
 
-Ce programme permet de lire les données de votre Pompe à Chaleur Hitachi Yutaki via la passerelle Modbus ATW-MBS-02. Il génère automatiquement des rapports au format CSV et PDF.
+🇫🇷 French version of this document [is available in README.fr.md](https://github.com/alepee/hitachi-yutaki-modus-data-extractor/blob/main/README.fr.md)
 
-## Compatibilité
+This program reads data from your Hitachi Yutaki Heat Pump via the ATW-MBS-02 Modbus gateway. It automatically generates CSV and PDF reports.
 
-Compatible avec les modèles Hitachi Yutaki suivants :
+## Compatibility
+
+Compatible with the following Hitachi Yutaki models:
 
 - Yutaki S
 - Yutaki S Combi
 - Yutaki S80
 - Yutaki M
 
-## Prérequis
+## Prerequisites
 
-- Python 3.7 ou plus récent
-- Une passerelle ATW-MBS-02 connectée à votre PAC
-- Le fichier modbus.csv (fourni avec le programme)
-- Une connexion réseau vers la passerelle ATW-MBS-02
+- Python 3.7 or newer
+- An ATW-MBS-02 gateway connected to your heat pump
+- The modbus.csv file (provided with the program)
+- Network connection to the ATW-MBS-02 gateway
 
-## Installation et utilisation
+## Installation and Usage
 
-### Pour Windows
+### For Windows
 
-1. Téléchargez et installez Python depuis [python.org](https://www.python.org/downloads/)
-   - Lors de l'installation, **cochez la case "Add Python to PATH"**
-2. Double-cliquez sur `install_and_run.bat`
+1. Download and install Python from [python.org](https://www.python.org/downloads/)
+   - During installation, **check the "Add Python to PATH" box**
+2. Double-click on `install_and_run.bat`
 
-### Pour Linux/Mac
+### For Linux/Mac
 
-1. Ouvrez un terminal
-2. Rendez le script exécutable avec la commande :
+1. Open a terminal
+2. Make the script executable with the command:
 
     ```sh
     chmod +x install_and_run.sh
     ```
 
-3. Exécutez le script :
+3. Run the script:
 
     ```sh
     ./install_and_run.sh
     ```
 
-## Configuration de la passerelle
+## Gateway Configuration
 
-1. Vérifiez que votre passerelle ATW-MBS-02 est correctement connectée :
-   - À votre PAC Hitachi via le port H-LINK
-   - À votre réseau local via le port Ethernet
+1. Verify that your ATW-MBS-02 gateway is properly connected:
+   - To your Hitachi heat pump via the H-LINK port
+   - To your local network via the Ethernet port
 
-2. Notez l'adresse IP de votre passerelle ATW-MBS-02 :
-   - Par défaut : 192.168.0.4
-   - Si vous avez changé l'IP, utilisez la nouvelle adresse
+2. Note the IP address of your ATW-MBS-02 gateway:
+   - Default: 192.168.0.4
+   - If you changed the IP, use the new address
 
-3. Configurez l'adresse IP dans le programme :
-   - Ouvrez le fichier `.env` avec un éditeur de texte
-   - Modifiez l'adresse IP après `MODBUS_IP_ADDRESS=`
-   - Sauvegardez le fichier
+3. Configure the IP address in the program:
+   - Open the `.env` file with a text editor
+   - Modify the IP address after `MODBUS_IP_ADDRESS=`
+   - Save the file
 
-## Résultats
+## Results
 
-Les fichiers générés se trouvent dans le dossier `extracted_data` :
+Generated files are stored in the `extracted_data` folder:
 
-- Un fichier CSV contenant toutes les valeurs brutes
-- Un fichier PDF avec un rapport détaillé et interprété, incluant :
-  - États de fonctionnement
-  - Températures
-  - Modes de fonctionnement
-  - Alarmes éventuelles
-  - Configurations actives
+- A CSV file containing all raw values
+- A PDF file with a detailed interpreted report, including:
+  - Operating states
+  - Temperatures
+  - Operating modes
+  - Potential alarms
+  - Active configurations
 
-Les fichiers sont horodatés pour garder un historique des lectures.
+Files are timestamped to maintain a reading history.
 
-## Dépannage
+## Troubleshooting
 
-Si vous rencontrez des problèmes :
+If you encounter problems:
 
-1. Vérification de Python :
-   - Ouvrez une invite de commande
-   - Tapez `python --version`
-   - Vous devriez voir la version de Python (3.7 ou plus)
+1. Python verification:
+   - Open a command prompt
+   - Type `python --version`
+   - You should see the Python version (3.7 or higher)
 
-2. Vérification de la connexion à la passerelle :
-   - Ouvrez une invite de commande
-   - Tapez `ping` suivi de l'adresse IP de votre passerelle
-   - Exemple : `ping 192.168.0.4`
-   - Vous devriez recevoir des réponses
+2. Gateway connection verification:
+   - Open a command prompt
+   - Type `ping` followed by your gateway's IP address
+   - Example: `ping 192.168.0.4`
+   - You should receive responses
 
-3. Vérifications des fichiers :
-   - Le fichier modbus.csv doit être présent
-   - Le fichier .env doit contenir la bonne adresse IP
-   - Les droits d'écriture dans le dossier doivent être corrects
+3. File checks:
+   - The modbus.csv file must be present
+   - The .env file must contain the correct IP address
+   - Write permissions in the folder must be correct
 
-4. Messages d'erreur courants :
-   - "ModbusException" : Problème de connexion à la passerelle
-   - "FileNotFoundError" : Fichier modbus.csv manquant
-   - "Permission denied" : Problème de droits d'accès
+4. Common error messages:
+   - "ModbusException": Gateway connection problem
+   - "FileNotFoundError": Missing modbus.csv file
+   - "Permission denied": Access rights problem
 
 ## Support
 
-Si vous avez besoin d'aide supplémentaire :
+If you need additional help:
 
-1. Vérifiez que tous les prérequis sont remplis
-2. Assurez-vous que la passerelle est accessible sur le réseau
-3. Vérifiez les connexions physiques entre la PAC et la passerelle
+1. Verify that all prerequisites are met
+2. Ensure the gateway is accessible on the network
+3. Check physical connections between the heat pump and gateway 
