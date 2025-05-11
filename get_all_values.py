@@ -22,13 +22,15 @@ with open('modbus.csv', 'r') as input_file:
     headers = next(csv_reader)  # Read the header row
     addresses = [row[headers.index('address')] for row in csv_reader]
 
+
 def get_modbus_values(ip_address, addresses):
     client = ModbusTcpClient(ip_address)
     values = []
     try:
         client.connect()
         for address in addresses:
-            result = client.read_holding_registers(int(address), 1)
+            result = client.read_holding_registers(
+                address=int(address), count=1)
             if not result.isError():
                 values.append(str(result.registers[0]))
             else:
@@ -38,6 +40,7 @@ def get_modbus_values(ip_address, addresses):
     finally:
         client.close()
     return values
+
 
 # Get the IP address from .env
 modbus_ip = os.getenv('MODBUS_IP_ADDRESS')
@@ -54,15 +57,15 @@ os.makedirs('./extracted_data', exist_ok=True)
 output_filename = f'./extracted_data/modbus-{current_timestamp}.csv'
 with open(output_filename, 'w', newline='') as output_file:
     csv_writer = csv.writer(output_file)
-    
+
     # Write headers to the new CSV, adding a new column for modbus command output
     csv_writer.writerow(headers + ['value'])
-    
+
     # Open the original CSV file again to read all rows
     with open('modbus.csv', 'r') as input_file:
         csv_reader = csv.reader(input_file)
         next(csv_reader)  # Skip the header row
-        
+
         # Write each row with its corresponding value
         for row, value in zip(csv_reader, values):
             csv_writer.writerow(row + [value])
@@ -286,12 +289,13 @@ registers_info = {
     }
 }
 
+
 def interpret_bitwise_register(value, register_info):
     try:
         int_value = int(value)
         if "bits" in register_info:
             binary = format(int_value, f'0{len(register_info["bits"])}b')[::-1]
-            interpretations = [f"{bit_name}: {'<strong>True</strong>' if binary[i] == '1' else 'False'}" 
+            interpretations = [f"{bit_name}: {'<strong>True</strong>' if binary[i] == '1' else 'False'}"
                                for i, (bit_name, _) in enumerate(register_info["bits"].items())]
             return "<br/>".join(interpretations)
         elif "values" in register_info:
@@ -300,6 +304,7 @@ def interpret_bitwise_register(value, register_info):
             return "No Alarm" if int_value == 0 else f"Alarm number: {int_value}"
     except ValueError:
         return value  # Return original value if it's not a valid integer
+
 
 def interpret_register(register, value, range_info):
     if register in registers_info:
@@ -337,6 +342,7 @@ def interpret_register(register, value, range_info):
     else:
         return value  # Default to original value if no special interpretation
 
+
 def export_to_pdf(csv_filename, pdf_filename, headers):
     with open(csv_filename, 'r') as csv_file:
         csv_reader = csv.reader(csv_file)
@@ -347,14 +353,18 @@ def export_to_pdf(csv_filename, pdf_filename, headers):
                             leftMargin=10, rightMargin=10,
                             topMargin=10, bottomMargin=10)
 
-    style_header = ParagraphStyle('Header', fontSize=7, leading=8, alignment=TA_CENTER, fontName='Helvetica-Bold')
-    style_normal = ParagraphStyle('Normal', fontSize=6, leading=7, fontName='Helvetica')
-    style_interpretation = ParagraphStyle('Interpretation', fontSize=6, leading=7, fontName='Helvetica')
+    style_header = ParagraphStyle(
+        'Header', fontSize=7, leading=8, alignment=TA_CENTER, fontName='Helvetica-Bold')
+    style_normal = ParagraphStyle(
+        'Normal', fontSize=6, leading=7, fontName='Helvetica')
+    style_interpretation = ParagraphStyle(
+        'Interpretation', fontSize=6, leading=7, fontName='Helvetica')
     style_interpretation.allowWidows = 0
     style_interpretation.allowOrphans = 0
 
     # Set headers
-    data[0] = ["register","address","description and notice","access","value","interpretation"]
+    data[0] = ["register", "address", "description and notice",
+               "access", "value", "interpretation"]
     data[0] = [Paragraph(cell, style_header) for cell in data[0]]
 
     for key, row in enumerate(data[1:]):
@@ -362,17 +372,19 @@ def export_to_pdf(csv_filename, pdf_filename, headers):
         address = row[1]
         access = row[4]
         value = row[5]
-        description_and_notice = f"<strong>{row[2]}</strong><br/>{"<br/>".join(row[3].split(';'))}"
-        interpretation = interpret_register(register_number, value, description_and_notice)
+        description_and_notice = f'<strong>{row[2]}</strong><br/>{("<br/>".join(row[3].split(";")))}'
+        interpretation = interpret_register(
+            register_number, value, description_and_notice)
 
-        data[key+1] = [Paragraph(cell, style_normal) for cell in [register_number, address, description_and_notice, access, value, interpretation]]
+        data[key+1] = [Paragraph(cell, style_normal) for cell in [register_number,
+                                                                  address, description_and_notice, access, value, interpretation]]
 
     available_width = page_size[0]
     width_ratios = [0.05, 0.05, 0.4, 0.05, 0.05, 0.3]
     col_widths = [w * available_width for w in width_ratios]
 
     table = Table(data, colWidths=col_widths, repeatRows=1)
-    
+
     style = TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
@@ -392,8 +404,9 @@ def export_to_pdf(csv_filename, pdf_filename, headers):
         ('ALIGN', (-1, 1), (-1, -1), 'LEFT'),
     ])
     table.setStyle(style)
-    
+
     doc.build([table])
+
 
 # Export the data to PDF
 pdf_filename = f'./extracted_data/modbus-{current_timestamp}.pdf'
