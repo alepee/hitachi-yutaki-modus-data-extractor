@@ -97,6 +97,66 @@ If you encounter problems:
    - "FileNotFoundError": Missing modbus.csv file
    - "Permission denied": Access rights problem
 
+## Advanced Tools: Exploring Undocumented Registers
+
+In addition to reading documented registers, this project includes tools to explore undocumented Modbus registers (addresses 0-999). These registers may contain additional information about the gateway itself, such as IP address, firmware version, and other system data.
+
+### Full Scan of Undocumented Registers
+
+To scan all undocumented registers (0-999):
+
+```sh
+python scan_undocumented_registers.py
+```
+
+This will:
+- Read all registers from address 0 to 999
+- Save results to a CSV file in `extracted_data/` (gitignored)
+- Automatically detect potential patterns:
+  - IP addresses (4 consecutive registers with values 0-255)
+  - ASCII strings (readable text embedded in registers)
+  - Statistical analysis of found values
+
+**⚠️ Warning:** This scan reads 1000 registers and may take several minutes to complete.
+
+**💾 Note:** Results are saved to `extracted_data/` by default (not version controlled). If you want to keep important discovery results in Git, manually move the generated CSV file to the project root (see `undocumented_registers-20260122_020224.csv` as an example).
+
+### Targeted Register Inspection
+
+To inspect a specific range of registers:
+
+```sh
+python inspect_register_range.py <start_address> <end_address>
+```
+
+Examples:
+
+```sh
+# Inspect the first 50 registers (addresses 0-49, registers 1-50)
+python inspect_register_range.py 0 49
+
+# Inspect a specific suspicious area
+python inspect_register_range.py 100 150
+
+# Use a custom IP address
+python inspect_register_range.py 0 49 --ip 192.168.1.100
+```
+
+This tool displays:
+- Decimal, hexadecimal, and binary representations
+- ASCII interpretation (if printable characters)
+- Potential IP octet values
+- Temperature interpretation (signed value with decimal)
+- Automatic pattern detection (IP addresses, ASCII strings)
+
+### Use Cases
+
+Based on community feedback (see [discussion #144](https://github.com/alepee/hass-hitachi_yutaki/discussions/144)), these tools can help discover:
+
+- **Gateway IP address**: Likely stored across 4 consecutive registers
+- **Gateway firmware version**: May complement registers 1096-1097 (unit and controller firmware)
+- **Additional system information**: Undocumented configuration and status data
+
 ## Support
 
 If you need additional help:

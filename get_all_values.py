@@ -10,18 +10,6 @@ from pymodbus.exceptions import ModbusException
 import os
 from dotenv import load_dotenv
 
-# Get current timestamp
-current_timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-
-# Load environment variables from .env file
-load_dotenv()
-
-# Read addresses from the CSV file
-with open('modbus.csv', 'r') as input_file:
-    csv_reader = csv.reader(input_file)
-    headers = next(csv_reader)  # Read the header row
-    addresses = [row[headers.index('address')] for row in csv_reader]
-
 
 def get_modbus_values(ip_address, addresses):
     client = ModbusTcpClient(ip_address)
@@ -41,36 +29,6 @@ def get_modbus_values(ip_address, addresses):
         client.close()
     return values
 
-
-# Get the IP address from .env
-modbus_ip = os.getenv('MODBUS_IP_ADDRESS')
-if not modbus_ip:
-    raise ValueError("MODBUS_IP_ADDRESS not set")
-
-# Get modbus values
-values = get_modbus_values(modbus_ip, addresses)
-
-# Create a new CSV file with timestamp in the name
-# Ensure the extracted_data directory exists
-os.makedirs('./extracted_data', exist_ok=True)
-
-output_filename = f'./extracted_data/modbus-{current_timestamp}.csv'
-with open(output_filename, 'w', newline='') as output_file:
-    csv_writer = csv.writer(output_file)
-
-    # Write headers to the new CSV, adding a new column for modbus command output
-    csv_writer.writerow(headers + ['value'])
-
-    # Open the original CSV file again to read all rows
-    with open('modbus.csv', 'r') as input_file:
-        csv_reader = csv.reader(input_file)
-        next(csv_reader)  # Skip the header row
-
-        # Write each row with its corresponding value
-        for row, value in zip(csv_reader, values):
-            csv_writer.writerow(row + [value])
-
-print(f"Process completed. New file created: {output_filename}")
 
 # Register information dictionary
 registers_info = {
@@ -408,7 +366,54 @@ def export_to_pdf(csv_filename, pdf_filename, headers):
     doc.build([table])
 
 
-# Export the data to PDF
-pdf_filename = f'./extracted_data/modbus-{current_timestamp}.pdf'
-export_to_pdf(output_filename, pdf_filename, headers)
-print(f"PDF exported: {pdf_filename}")
+def main():
+    # Get current timestamp
+    current_timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    # Load environment variables from .env file
+    load_dotenv()
+
+    # Read addresses from the CSV file
+    with open('modbus.csv', 'r') as input_file:
+        csv_reader = csv.reader(input_file)
+        headers = next(csv_reader)  # Read the header row
+        addresses = [row[headers.index('address')] for row in csv_reader]
+
+    # Get the IP address from .env
+    modbus_ip = os.getenv('MODBUS_IP_ADDRESS')
+    if not modbus_ip:
+        raise ValueError("MODBUS_IP_ADDRESS not set")
+
+    # Get modbus values
+    values = get_modbus_values(modbus_ip, addresses)
+
+    # Create a new CSV file with timestamp in the name
+    # Ensure the extracted_data directory exists
+    os.makedirs('./extracted_data', exist_ok=True)
+
+    output_filename = f'./extracted_data/modbus-{current_timestamp}.csv'
+    with open(output_filename, 'w', newline='') as output_file:
+        csv_writer = csv.writer(output_file)
+
+        # Write headers to the new CSV, adding a new column for modbus command output
+        csv_writer.writerow(headers + ['value'])
+
+        # Open the original CSV file again to read all rows
+        with open('modbus.csv', 'r') as input_file:
+            csv_reader = csv.reader(input_file)
+            next(csv_reader)  # Skip the header row
+
+            # Write each row with its corresponding value
+            for row, value in zip(csv_reader, values):
+                csv_writer.writerow(row + [value])
+
+    print(f"Process completed. New file created: {output_filename}")
+
+    # Export the data to PDF
+    pdf_filename = f'./extracted_data/modbus-{current_timestamp}.pdf'
+    export_to_pdf(output_filename, pdf_filename, headers)
+    print(f"PDF exported: {pdf_filename}")
+
+
+if __name__ == "__main__":
+    main()

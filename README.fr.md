@@ -95,6 +95,66 @@ Si vous rencontrez des problèmes :
    - "FileNotFoundError" : Fichier modbus.csv manquant
    - "Permission denied" : Problème de droits d'accès
 
+## Outils avancés : Explorer les registres non documentés
+
+En plus de la lecture des registres documentés, ce projet inclut des outils pour explorer les registres Modbus non documentés (adresses 0-999). Ces registres peuvent contenir des informations supplémentaires sur la passerelle elle-même, telles que l'adresse IP, la version du firmware et d'autres données système.
+
+### Scan complet des registres non documentés
+
+Pour scanner tous les registres non documentés (0-999) :
+
+```sh
+python scan_undocumented_registers.py
+```
+
+Cela va :
+- Lire tous les registres de l'adresse 0 à 999
+- Sauvegarder les résultats dans un fichier CSV dans `extracted_data/` (ignoré par Git)
+- Détecter automatiquement les motifs potentiels :
+  - Adresses IP (4 registres consécutifs avec des valeurs 0-255)
+  - Chaînes ASCII (texte lisible intégré dans les registres)
+  - Analyse statistique des valeurs trouvées
+
+**⚠️ Attention :** Ce scan lit 1000 registres et peut prendre plusieurs minutes.
+
+**💾 Note :** Les résultats sont sauvegardés dans `extracted_data/` par défaut (non versionné). Si vous souhaitez conserver d'importantes découvertes dans Git, déplacez manuellement le fichier CSV généré à la racine du projet (voir `undocumented_registers-20260122_020224.csv` comme exemple).
+
+### Inspection ciblée de registres
+
+Pour inspecter une plage spécifique de registres :
+
+```sh
+python inspect_register_range.py <adresse_début> <adresse_fin>
+```
+
+Exemples :
+
+```sh
+# Inspecter les 50 premiers registres (adresses 0-49, registres 1-50)
+python inspect_register_range.py 0 49
+
+# Inspecter une zone spécifique suspecte
+python inspect_register_range.py 100 150
+
+# Utiliser une adresse IP personnalisée
+python inspect_register_range.py 0 49 --ip 192.168.1.100
+```
+
+Cet outil affiche :
+- Représentations décimale, hexadécimale et binaire
+- Interprétation ASCII (si caractères imprimables)
+- Valeurs potentielles d'octet IP
+- Interprétation en température (valeur signée avec décimale)
+- Détection automatique de motifs (adresses IP, chaînes ASCII)
+
+### Cas d'usage
+
+Basé sur les retours de la communauté (voir [discussion #144](https://github.com/alepee/hass-hitachi_yutaki/discussions/144)), ces outils peuvent aider à découvrir :
+
+- **Adresse IP de la passerelle** : Probablement stockée sur 4 registres consécutifs
+- **Version du firmware de la passerelle** : Peut compléter les registres 1096-1097 (firmware de l'unité et du contrôleur)
+- **Informations système supplémentaires** : Données de configuration et d'état non documentées
+
 ## Support
 
 Si vous avez besoin d'aide supplémentaire :
