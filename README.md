@@ -97,6 +97,31 @@ If you encounter problems:
    - "FileNotFoundError": Missing modbus.csv file
    - "Permission denied": Access rights problem
 
+## Gateway Unique ID (Home Assistant)
+
+This project includes a tool to retrieve your gateway's unique identifier, needed for the [Home Assistant integration](https://github.com/alepee/hass-hitachi_yutaki) (see [issue #162](https://github.com/alepee/hass-hitachi_yutaki/issues/162)).
+
+### Quick Start
+
+```sh
+# Linux/macOS
+./scripts/get_unique_id.sh
+
+# Windows
+scripts\get_unique_id.bat
+```
+
+The script will prompt for your gateway IP and display:
+```
+✅ Unique ID (decimal): 3846-103-56
+✅ Unique ID (hex):     0F06:0067:0038
+📦 Unit Model:          S80
+```
+
+**Help us validate this feature** by sharing your unique ID on [issue #162](https://github.com/alepee/hass-hitachi_yutaki/issues/162).
+
+For technical details, see [docs/UNIQUE_ID_SOLUTION.md](docs/UNIQUE_ID_SOLUTION.md).
+
 ## Advanced Tools: Exploring Undocumented Registers
 
 In addition to reading documented registers, this project includes tools to explore undocumented Modbus registers (addresses 0-999). These registers may contain additional information about the gateway itself, such as IP address, firmware version, and other system data.

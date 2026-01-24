@@ -95,6 +95,31 @@ Si vous rencontrez des problèmes :
    - "FileNotFoundError" : Fichier modbus.csv manquant
    - "Permission denied" : Problème de droits d'accès
 
+## Identifiant unique de la passerelle (Home Assistant)
+
+Ce projet inclut un outil pour récupérer l'identifiant unique de votre passerelle, nécessaire pour l'[intégration Home Assistant](https://github.com/alepee/hass-hitachi_yutaki) (voir [issue #162](https://github.com/alepee/hass-hitachi_yutaki/issues/162)).
+
+### Utilisation rapide
+
+```sh
+# Linux/macOS
+./scripts/get_unique_id.sh
+
+# Windows
+scripts\get_unique_id.bat
+```
+
+Le script demandera l'IP de votre passerelle et affichera :
+```
+✅ Unique ID (decimal): 3846-103-56
+✅ Unique ID (hex):     0F06:0067:0038
+📦 Unit Model:          S80
+```
+
+**Aidez-nous à valider cette fonctionnalité** en partageant votre identifiant unique sur l'[issue #162](https://github.com/alepee/hass-hitachi_yutaki/issues/162).
+
+Pour les détails techniques, voir [docs/UNIQUE_ID_SOLUTION.md](docs/UNIQUE_ID_SOLUTION.md).
+
 ## Outils avancés : Explorer les registres non documentés
 
 En plus de la lecture des registres documentés, ce projet inclut des outils pour explorer les registres Modbus non documentés (adresses 0-999). Ces registres peuvent contenir des informations supplémentaires sur la passerelle elle-même, telles que l'adresse IP, la version du firmware et d'autres données système.

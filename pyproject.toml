@@ -1,0 +1,17 @@
+[project]
+name = "hitachi-yutaki-modus-data-extractor"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "flask>=3.1.2",
+    "flask-socketio>=5.5.1",
+    "matplotlib>=3.10.7",
+    "pymodbus>=3.11.3",
+    "python-dotenv>=1.1.1",
+    "reportlab>=4.4.4",
+]
+
+[project.scripts]
+extract = "get_all_values:main"
